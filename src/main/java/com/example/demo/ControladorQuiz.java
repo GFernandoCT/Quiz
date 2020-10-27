@@ -37,7 +37,7 @@ public class ControladorQuiz {
 		}
 		messages.add(nombre);
 		request.getSession().setAttribute("USUARIOS",messages);
-		return "Pagina2";
+		return "redirect:/Pagina2";
 	}
 	
 	@PostMapping("/Pagina2")
@@ -54,8 +54,15 @@ public class ControladorQuiz {
 	}
 	
 	@PostMapping("/volverInicio")
-	public String volverInicio() {
-		return "quiz";
+	public String volverInicio(HttpServletRequest request) {
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) request.getSession().getAttribute("USUARIOS");
+		if (messages == null) {
+			messages = new ArrayList<>();
+			request.getSession().setAttribute("USUARIOS", messages);
+		}
+		request.getSession().setAttribute("USUARIOS",messages);
+		return "redirect:/quiz";
 	}
 	
 }
