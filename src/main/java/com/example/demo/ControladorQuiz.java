@@ -40,18 +40,6 @@ public class ControladorQuiz {
 		return "redirect:/Pagina2";
 	}
 	
-	@PostMapping("/Pagina2")
-	public String pagina2(@RequestParam("nombre") String nombre, HttpServletRequest request) {
-		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) request.getSession().getAttribute("USUARIOS");
-		if (messages == null) {
-			messages = new ArrayList<>();
-			request.getSession().setAttribute("USUARIOS", messages);
-		}
-		messages.add(nombre);
-		request.getSession().setAttribute("USUARIOS",messages);
-		return "Pagina2";
-	}
 	
 	@PostMapping("/volverInicio")
 	public String volverInicio(HttpServletRequest request) {
@@ -65,4 +53,14 @@ public class ControladorQuiz {
 		return "redirect:/quiz";
 	}
 	
+	@GetMapping("/Pagina2")
+	public String pagina2(Model model, HttpSession session) {
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
+		if(messages == null) {
+			messages = new ArrayList<>();
+		}
+		model.addAttribute("sessionMessages", messages);
+		return "Pagina2";
+	}
 }
