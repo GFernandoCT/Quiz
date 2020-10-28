@@ -33,5 +33,11 @@
 						<li th:text="${message}">nombre</li>
 			</ul>
 	</div>
+	      <div>
+			<h2>Puntuaciones</h2>
+			<ul th:each="puntuaciones : ${sessionPuntuacion}">
+						<li th:text="${puntuaciones}">puntos</li>
+			</ul>
+	</div>
 </body>
 </html>
