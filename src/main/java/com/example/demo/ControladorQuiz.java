@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -57,20 +58,24 @@ public class ControladorQuiz {
 	
 	@PostMapping("/paginaSiguiente")
 	public String paginaSiguiente(@RequestParam("puntuacion") String puntuacion, HttpServletRequest request) {
-		int valor = Integer.parseInt(puntuacion);
-		if(request.getSession().getAttribute("PUNTUACION") == null) {
-			int puntuaciones = 0;
-			request.getSession().setAttribute("sessionPuntuacion",puntuaciones);
-		} else {
-			int total = 0;
-			List<Integer> numeros =  (List<Integer>) request.getSession().getAttribute("PUNTUACION");
-			for(int valores : numeros ) {
-				 total += valores;
-			}
-			total = total+valor;
-			int puntuaciones = total;
+		StringTokenizer tokenizer = new StringTokenizer(puntuacion,",");
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) request.getSession().getAttribute("USUARIOS");
+		if (messages == null) {
+			messages = new ArrayList<>();
+			request.getSession().setAttribute("USUARIOS", messages);
+		}
+		@SuppressWarnings("unchecked")
+		List<Integer> puntuaciones = (List<Integer>) request.getSession().getAttribute("PUNTUACION");
+		if (puntuaciones == null) {
+			puntuaciones = new ArrayList<>();
 			request.getSession().setAttribute("PUNTUACION", puntuaciones);
 		}
+		while (tokenizer.hasMoreElements()) {
+			puntuaciones.add(Integer.parseInt(tokenizer.nextToken()));
+		}		
+		request.getSession().setAttribute("USUARIOS",messages);
+		request.getSession().setAttribute("PUNTUACION",puntuaciones);
 		return "redirect:/Pagina2";
 	}
 	
