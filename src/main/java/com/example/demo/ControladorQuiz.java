@@ -76,7 +76,7 @@ public class ControladorQuiz {
 		}		
 		request.getSession().setAttribute("USUARIOS",messages);
 		request.getSession().setAttribute("PUNTUACION",puntuaciones);
-		return "redirect:/Pagina2";
+		return "redirect:/Pagina3";
 	}
 	
 	@PostMapping("/volverInicio")
@@ -113,5 +113,22 @@ public class ControladorQuiz {
 		model.addAttribute("sessionMessages", messages);
 		model.addAttribute("sessionPuntuacion",puntuaciones);
 		return "Pagina2";
+	}
+	
+	@GetMapping("/Pagina3")
+	public String pagina3(Model model, HttpSession session) {
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
+		if(messages == null) {
+			messages = new ArrayList<>();
+		}
+		@SuppressWarnings("unchecked")
+		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
+		if(puntuaciones == null) {
+			puntuaciones = new ArrayList<>();
+		}
+		model.addAttribute("sessionMessages", messages);
+		model.addAttribute("sessionPuntuacion",puntuaciones);
+		return "Pagina3";
 	}
 }

@@ -11,56 +11,38 @@
 <body>
 	<div class="jumbotron">
 		<div class="d-flex justify-content-center">
-			<h1 class="display-4">¿Qué paises te gustaría visitar?</h1>
+			<h1 class="display-4">¿Dónde prefieres pasar tus vacaciones?</h1>
 		</div>
 		<hr class="my-4">
 		<div class="container">
 			<div class="d-flex justify-content-center">
-				<img th:src="@{images/mapamundi.jpg}" class="img-fluid" alt="Mapa del mundo">
+				<img th:src="@{images/vacaciones.jpg}" class="img-fluid" alt="Vacaciones">
 			</div>
 			<br>
 			<div class="form-group">
 				<form th:action="@{/paginaSiguiente}" method="post">
 					<div class="d-flex justify-content-center">
 						<fieldset class="form-group form-group-lg">
-							<div class="form-check mx-2">
-								<label class="form-check-label">
-									<input class="form-check-input" type="checkbox" value="1" name="puntuacion">
-									<h4>Paris</h4>
+							<div class="custom-control custom-radio mx-2">
+								<input type="radio" id="radioMontaña" name="radio" class="custom-control-input"checked="" value="1">
+								<label class="custom-control-label" for="radioMontaña"><h4>Montaña</h4>
 								</label>
 							</div>
-							<div class="form-check mx-2">
-								<label class="form-check-label">
-									<input class="form-check-input" type="checkbox" value="1" name="puntuacion">
-									<h4>Roma</h4>
-								</label>
-							</div>
-						</fieldset>
-						<fieldset class="form-group">
-							<div class="form-check mx-2">
-								<label class="form-check-label">
-									<input class="form-check-input" type="checkbox" value="1" name="puntuacion">
-									<h4>Londres</h4>
-								</label>
-							</div>
-							<div class="form-check mx-2">
-								<label class="form-check-label">
-									<input class="form-check-input" type="checkbox" value="2" name="puntuacion">
-									<h4>Tokyo</h4>
+							<div class="custom-control custom-radio mx-2">
+								<input type="radio" id="radioPlaya" name="radio" class="custom-control-input"checked="" value="2">
+								<label class="custom-control-label" for="radioPlaya"><h4>Playa</h4>
 								</label>
 							</div>
 						</fieldset>
-						<fieldset class="form-group">
-							<div class="form-check mx-2">
-								<label class="form-check-label">
-									<input class="form-check-input" type="checkbox" value="2" name="puntuacion">
-									<h4>Dubai</h4>
+						<fieldset class="form-group form-group-lg">
+							<div class="custom-control custom-radio mx-2">
+								<input type="radio" id="radioPueblo" name="radio" class="custom-control-input"checked="" value="2">
+								<label class="custom-control-label" for="radioPueblo"><h4>Pueblo</h4>
 								</label>
 							</div>
-							<div class="form-check mx-2">
-								<label class="form-check-label">
-									<input class="form-check-input" type="checkbox" value="3" name="puntuacion">
-									<h4>Perú</h4>
+							<div class="custom-control custom-radio mx-2">
+								<input type="radio" id="radioCiudad" name="radio" class="custom-control-input"checked="" value="3">
+								<label class="custom-control-label" for="radioCiudad"><h4>Ciudad</h4>
 								</label>
 							</div>
 						</fieldset>
