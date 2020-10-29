@@ -39,9 +39,5 @@ public class ControladorSession {
 		return "redirect:/session";
 	}
 
-	@PostMapping("/destroy")
-	public String destroySession(HttpServletRequest request) {
-	request.getSession().invalidate();
-	return "redirect:/session";
-	}
+
 }

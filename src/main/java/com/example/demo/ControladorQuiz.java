@@ -35,6 +35,59 @@ public class ControladorQuiz {
 		return "quiz";
 	}
 	
+	@GetMapping("/Pagina2")
+	public String pagina2(Model model, HttpSession session) {
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
+		if(messages == null) {
+			messages = new ArrayList<>();
+		}
+		@SuppressWarnings("unchecked")
+		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
+		if(puntuaciones == null) {
+			puntuaciones = new ArrayList<>();
+		}
+		model.addAttribute("sessionMessages", messages);
+		model.addAttribute("sessionPuntuacion",puntuaciones);
+		return "Pagina2";
+	}
+	
+	
+	@GetMapping("/Pagina3")
+	public String pagina3(Model model, HttpSession session) {
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
+		if(messages == null) {
+			messages = new ArrayList<>();
+		}
+		@SuppressWarnings("unchecked")
+		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
+		if(puntuaciones == null) {
+			puntuaciones = new ArrayList<>();
+		}
+		model.addAttribute("sessionMessages", messages);
+		model.addAttribute("sessionPuntuacion",puntuaciones);
+		return "Pagina3";
+	}
+	
+	@GetMapping("/Pagina4")
+	public String pagina4(Model model, HttpSession session) {
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
+		if(messages == null) {
+			messages = new ArrayList<>();
+		}
+		@SuppressWarnings("unchecked")
+		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
+		if(puntuaciones == null) {
+			puntuaciones = new ArrayList<>();
+		}
+		model.addAttribute("sessionMessages", messages);
+		model.addAttribute("sessionPuntuacion",puntuaciones);
+		return "Pagina4";
+	}
+	
+	
 	@PostMapping("/nombreUsuarios")
 	public String nombreUsuarios(@RequestParam("nombre") String nombre, HttpServletRequest request) {
 		@SuppressWarnings("unchecked")
@@ -56,7 +109,7 @@ public class ControladorQuiz {
 		return "redirect:/Pagina2";
 	}
 	
-	@PostMapping("/paginaSiguiente")
+	@PostMapping("/paginaResultado2")
 	public String paginaSiguiente(@RequestParam("puntuacion") String puntuacion, HttpServletRequest request) {
 		StringTokenizer tokenizer = new StringTokenizer(puntuacion,",");
 		@SuppressWarnings("unchecked")
@@ -79,6 +132,29 @@ public class ControladorQuiz {
 		return "redirect:/Pagina3";
 	}
 	
+	@PostMapping("/paginaResultado3")
+	public String pagina3(@RequestParam("radio") String puntuacion, HttpServletRequest request) {
+		StringTokenizer tokenizer = new StringTokenizer(puntuacion,",");
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) request.getSession().getAttribute("USUARIOS");
+		if (messages == null) {
+			messages = new ArrayList<>();
+			request.getSession().setAttribute("USUARIOS", messages);
+		}
+		@SuppressWarnings("unchecked")
+		List<Integer> puntuaciones = (List<Integer>) request.getSession().getAttribute("PUNTUACION");
+		if (puntuaciones == null) {
+			puntuaciones = new ArrayList<>();
+			request.getSession().setAttribute("PUNTUACION", puntuaciones);
+		}
+		while (tokenizer.hasMoreElements()) {
+			puntuaciones.add(Integer.parseInt(tokenizer.nextToken()));
+		}		
+		request.getSession().setAttribute("USUARIOS",messages);
+		request.getSession().setAttribute("PUNTUACION",puntuaciones);
+		return "redirect:/Pagina4";
+	}
+	
 	@PostMapping("/volverInicio")
 	public String volverInicio(HttpServletRequest request) {
 		@SuppressWarnings("unchecked")
@@ -98,37 +174,9 @@ public class ControladorQuiz {
 		return "redirect:/quiz";
 	}
 	
-	@GetMapping("/Pagina2")
-	public String pagina2(Model model, HttpSession session) {
-		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
-		if(messages == null) {
-			messages = new ArrayList<>();
-		}
-		@SuppressWarnings("unchecked")
-		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
-		if(puntuaciones == null) {
-			puntuaciones = new ArrayList<>();
-		}
-		model.addAttribute("sessionMessages", messages);
-		model.addAttribute("sessionPuntuacion",puntuaciones);
-		return "Pagina2";
-	}
-	
-	@GetMapping("/Pagina3")
-	public String pagina3(Model model, HttpSession session) {
-		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
-		if(messages == null) {
-			messages = new ArrayList<>();
-		}
-		@SuppressWarnings("unchecked")
-		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
-		if(puntuaciones == null) {
-			puntuaciones = new ArrayList<>();
-		}
-		model.addAttribute("sessionMessages", messages);
-		model.addAttribute("sessionPuntuacion",puntuaciones);
-		return "Pagina3";
+	@PostMapping("/destroy")
+	public String destroySession(HttpServletRequest request) {
+	request.getSession().invalidate();
+	return "redirect:/quiz";
 	}
 }

@@ -20,7 +20,7 @@
 			</div>
 			<br>
 			<div class="form-group">
-				<form th:action="@{/paginaSiguiente}" method="post">
+				<form th:action="@{/paginaResultado2}" method="post">
 					<div class="d-flex justify-content-center">
 						<fieldset class="form-group form-group-lg">
 							<div class="form-check mx-2">
@@ -72,16 +72,16 @@
 		</div>
 	</div>
 
+	<div class="form-group">
+		<form th:action="@{/destroy}" method="post">
+			<br><button type="submit" class="btn btn-primary btn-lg btn-block">Volver</button>
+		</form>
+	</div>
 	<div>
 		<h2>Usuarios</h2>
 		<ul th:each="message : ${sessionMessages}">
 			<li th:text="${message}">nombre</li>
 		</ul>
-	</div>
-	<div class="form-group">
-		<form th:action="@{/volverInicio}" method="post">
-			<br><button type="submit" class="btn btn-primary btn-lg btn-block">Volver</button>
-		</form>
 	</div>
 	<div>
 		<h2>Puntuaciones</h2>
