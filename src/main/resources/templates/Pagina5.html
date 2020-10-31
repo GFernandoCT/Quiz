@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <title>¿Que princesa disney eres?</title>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="d-flex justify-content-center">
+            <h1 class="display-4">¿Qué animal tendrías como mascota?</h1>
+        </div>
+        <hr class="my-4">
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <img th:src="@{images/musica.jpg}" class="img-fluid" alt="Musica"><br>
+            </div>
+            <br>
+            <div class="form-group">
+                <form th:action="@{/paginaPregunta5}" method="post">
+                    <div class="d-flex justify-content-center">
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary btn-lg mt-2" name="puntuacion" value="3">KPop</button>
+                            <button type="submit" class="btn btn-primary btn-lg mt-2" name="puntuacion" value="1">Hip Hop</button>
+                            <button type="submit" class="btn btn-primary btn-lg mt-2" name="puntuacion" value="2">Jazz</button>
+                            <button type="submit" class="btn btn-primary btn-lg mt-2" name="puntuacion" value="2">Rock</button>
+                            <button type="submit" class="btn btn-primary btn-lg mt-2" name="puntuacion" value="6">Alternativo</button>
+                        </div>
+                    </div>
+                    <!-- <br><button type="submit" class="btn btn-primary btn-lg btn-block" value="0"
+                        name="puntuacion">Siguiente Pregunta</button> -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <form th:action="@{/destroy}" method="post">
+            <br><button type="submit" class="btn btn-primary btn-lg btn-block">Volver</button>
+        </form>
+    </div>
+    <div>
+        <h2>Usuarios</h2>
+        <ul th:each="message : ${sessionMessages}">
+            <li th:text="${message}">nombre</li>
+        </ul>
+    </div>
+    <div>
+        <h2>Puntuaciones</h2>
+        <ul th:each="puntuaciones : ${sessionPuntuacion}">
+            <li th:text="${puntuaciones}">puntos</li>
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -42,6 +42,10 @@
             <li th:text="${puntuaciones}">puntos</li>
         </ul>
     </div>
+     <div>
+        <h2>Resultado</h2>
+        <p th:text="${sessionResultado}"></p>
+    </div>
     	<div>
 			<form th:action="@{/destroy}" method="post">
 						<input type="submit" value="Destroy Session" />
