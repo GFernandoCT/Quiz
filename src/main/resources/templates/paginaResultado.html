@@ -15,17 +15,44 @@
         </div>
         <hr class="my-4">
         <div class="d-flex justify-content-center">
-            <h3>Has obtenido un total de <p th:text=${sessionResultado}>asdasd asd <p></p> asdasd</h3>
+            <h3>Has obtenido un total de <span th:utext=${sessionResultado}></span> puntos por lo que tu princesa disney es... </h3>
         </div>
-        <div class="d-flex justify-content-center">
-            <img th:src="@{images/princesasGrande.jpg}" class="img-fluid" alt="Princesas Disney">
+        <div th:if="${sessionResultado < 10}">
+        <div class="d-flex justify-content-center" >
+        	<img alt="Princesa Resultado" th:src="@{images/tiana.jpg}">
+        </div>
+        <div class="d-flex justify-content-center" >
+        	<h3><br>¡Tiana es tu princesa disney!</h3>
+        </div>
+        </div>
+        <div th:if="${sessionResultado >= 10 and sessionResultado < 15}">
+        <div class="d-flex justify-content-center" >
+        	<img alt="Princesa Resultado" th:src="@{images/cenicienta.jpg}">
+        </div>
+        <div class="d-flex justify-content-center" >
+        	<h3><br>¡Cenicienta es tu princesa disney!</h3>
+        </div>
+        </div>
+        <div th:if="${sessionResultado >= 15 and sessionResultado < 20}">
+        <div class="d-flex justify-content-center" >
+        	<img alt="Princesa Resultado" th:src="@{images/jasmin.jpg}">
+        </div>
+        <div class="d-flex justify-content-center" >
+        	<h3><br>¡Jasmin es tu princesa disney!</h3>
+        </div>
+        </div>
+        <div th:if="${sessionResultado >= 20}">
+        <div class="d-flex justify-content-center" >
+        	<img alt="Princesa Resultado" th:src="@{images/Ariel.jpg}">
+        </div>
+        <div class="d-flex justify-content-center" >
+        	<h3><br>¡Ariel es tu princesa disney!</h3>
+        </div>
         </div>
         <br />
         <div class="form-group">
-            <form th:action="@{/paginaPregunta1}" method="post">
-                <label class="col-form-label" for="inputDefault">Escribe tu nombre</label>
-                <input type="text" class="form-control" id="inputDefault" name="nombre">
-                <br><button type="submit" class="btn btn-primary btn-lg btn-block">¡Empezar el test!</button>
+            <form th:action="@{/destroy}" method="post">
+                <br><button type="submit" class="btn btn-secondary btn-lg btn-block">¡Empezar de nuevo!</button>
             </form>
         </div>
     </div>
@@ -45,10 +72,5 @@
         <h2>Resultado</h2>
         <p th:text="${sessionResultado}"></p>
     </div>
-    	<div>
-			<form th:action="@{/destroy}" method="post">
-						<input type="submit" value="Destroy Session" />
-			</form>
-	</div>
 </body>
 </html>
