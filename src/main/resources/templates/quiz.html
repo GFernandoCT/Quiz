@@ -30,18 +30,6 @@
             </form>
         </div>
     </div>
-    <div>
-        <h2>Usuarios</h2>
-        <ul th:each="message : ${sessionMessages}">
-            <li th:text="${message}">nombre</li>
-        </ul>
-    </div>
-    <div>
-        <h2>Puntuaciones</h2>
-        <ul th:each="puntuaciones : ${sessionPuntuacion}">
-            <li th:text="${puntuaciones}">puntos</li>
-        </ul>
-    </div>
     	<div>
 			<form th:action="@{/destroy}" method="post">
 						<input type="submit" value="Destroy Session" />

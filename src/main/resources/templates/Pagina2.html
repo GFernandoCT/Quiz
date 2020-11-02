@@ -13,8 +13,8 @@
 		<div class="d-flex justify-content-center">
 			<h1 class="display-4">¿Qué paises te gustaría visitar?</h1>
 		</div>
-		<hr class="my-4">
 		<div class="container">
+			<hr class="my-4">
 			<div class="d-flex justify-content-center">
 				<img th:src="@{images/mapamundi.jpg}" class="img-fluid" alt="Mapa del mundo">
 			</div>
@@ -60,7 +60,7 @@
 							<div class="form-check mx-2">
 								<label class="form-check-label">
 									<input class="form-check-input" type="checkbox" value="3" name="puntuacion">
-									<h4>Perú</h4>
+									<h4>Lima</h4>
 								</label>
 							</div>
 						</fieldset>
@@ -70,25 +70,11 @@
 				</form>
 			</div>
 		</div>
-	</div>
-
-	<div class="form-group">
-		<form th:action="@{/destroy}" method="post">
-			<br><button type="submit" class="btn btn-primary btn-lg btn-block">Volver</button>
-		</form>
-	</div>
-	<div>
-		<h2>Usuarios</h2>
-		<ul th:each="message : ${sessionMessages}">
-			<li th:text="${message}">nombre</li>
-		</ul>
-	</div>
-	<div>
-		<h2>Puntuaciones</h2>
-		<ul th:each="puntuaciones : ${sessionPuntuacion}">
-			<li th:text="${puntuaciones}">puntos</li>
-		</ul>
+				<div class="d-flex justify-content-end">
+			<form th:action="@{/destroy}" method="post">
+					<button type="submit" class="btn btn-secondary">Reiniciar Test</button>
+			</form>
+		</div>
 	</div>
 </body>
-
 </html>

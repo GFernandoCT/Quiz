@@ -158,13 +158,13 @@ public class ControladorQuiz {
 			puntuaciones = new ArrayList<>();
 		}
 		@SuppressWarnings("unchecked")
-		List<Integer> resultado = (List<Integer>) session.getAttribute("RESULTADO");
-		if(resultado == null) {
-			resultado = new ArrayList<>();
+		int puntos = 0;
+		for (Integer suma : puntuaciones) {
+			puntos += suma; 
 		}
 		model.addAttribute("sessionMessages", messages);
 		model.addAttribute("sessionPuntuacion",puntuaciones);
-		model.addAttribute("sessionResultado",resultado);
+		model.addAttribute("sessionResultado",puntos);
 		return "paginaResultado";
 	}
 	
@@ -332,7 +332,7 @@ public class ControladorQuiz {
 		request.getSession().setAttribute("USUARIOS",messages);
 		request.getSession().setAttribute("PUNTUACION",puntuaciones);
 		request.getSession().setAttribute("RESULTADO", puntos);
-		return "redirect:/Pagina7";
+		return "redirect:/paginaResultado";
 	}
 	
 	@PostMapping("/volverInicio")

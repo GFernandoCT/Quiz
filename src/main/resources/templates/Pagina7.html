@@ -11,12 +11,12 @@
 <body>
     <div class="jumbotron">
         <div class="d-flex justify-content-center">
-            <h1 class="display-4">¿Qué animal tendrías como mascota?</h1>
+            <h1 class="display-4">¿Qué deporte te gusta más?</h1>
         </div>
-        <hr class="my-4">
         <div class="container">
+            <hr class="my-4">
             <div class="d-flex justify-content-center">
-                <img th:src="@{images/animales.jpg}" class="img-fluid" alt="Animales">
+                <img th:src="@{images/deportes.jpg}" class="img-fluid" alt="Animales">
             </div>
             <br>
             <div class="form-group">
@@ -24,44 +24,27 @@
                     <div class="d-flex justify-content-center">
                         <fieldset class="form-group form-group-lg">
                             <div class="form-group">
-                                <label for="exampleSelect1">Example select</label>
+                                <label for="exampleSelect1">Elige un deporte:</label>
                                 <select class="form-control" id="exampleSelect1" name="puntuacion">
-                                    <option value="1">Perro</option>
-                                    <option value="1">Gato</option>
-                                    <option value="2">Conejo</option>
-                                    <option value="3">Cocodrilo</option>
-                                    <option value="4">Hurón</option>
+                                    <option value="1">Futbol</option>
+                                    <option value="1">Baloncesto</option>
+                                    <option value="2">Volleyball</option>
+                                    <option value="3">Petanca</option>
+                                    <option value="4">Beisbol</option>
                                 </select>
                             </div>
                         </fieldset>
                     </div>
-                    <br><button type="submit" class="btn btn-primary btn-lg btn-block" value="0"
+                    <br><button type="submit" class="btn btn-primary btn-lg btn-block"
                         name="puntuacion">Siguiente Pregunta</button>
                 </form>
             </div>
         </div>
-    </div>
-
-    <div class="form-group">
-        <form th:action="@{/destroy}" method="post">
-            <br><button type="submit" class="btn btn-primary btn-lg btn-block">Volver</button>
-        </form>
-    </div>
-    <div>
-        <h2>Usuarios</h2>
-        <ul th:each="message : ${sessionMessages}">
-            <li th:text="${message}">nombre</li>
-        </ul>
-    </div>
-    <div>
-        <h2>Puntuaciones</h2>
-        <ul th:each="puntuaciones : ${sessionPuntuacion}">
-            <li th:text="${puntuaciones}">puntos</li>
-        </ul>
-    </div>
-         <div>
-        <h2>Resultado</h2>
-        <p th:text="${sessionResultado}"></p>
+        <div class="d-flex justify-content-end">
+			<form th:action="@{/destroy}" method="post">
+					<button type="submit" class="btn btn-secondary">Reiniciar Test</button>
+			</form>
+		</div>
     </div>
 </body>
 
