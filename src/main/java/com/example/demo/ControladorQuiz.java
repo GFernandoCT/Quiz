@@ -24,7 +24,7 @@ public class ControladorQuiz {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index(Model model,HttpSession session) {
-	List<Jugador> jugadores= jugadorDao.findAll();
+	List<Jugador> jugadores=jugadorDao.findAll();
 	Jugador jugador = new Jugador( 1l,"pepe",64);
 	jugadores.add(jugador);
 	model.addAttribute("jugadores",jugadores);
