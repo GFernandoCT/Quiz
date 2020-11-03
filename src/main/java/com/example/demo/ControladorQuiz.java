@@ -6,17 +6,30 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 @Controller
 public class ControladorQuiz {
+	
+	@Autowired
+	private JugadorDao jugadorDao;
+	
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public String index(Model model,HttpSession session) {
+	List<Jugador> jugadores= jugadorDao.findAll();
+	Jugador jugador = new Jugador( 1l,"pepe",64);
+	jugadores.add(jugador);
+	model.addAttribute("jugadores",jugadores);
+	return "paginaResultado";
+	}
 	
 	@GetMapping("/quiz")
 	public String process(Model model, HttpSession session) {
@@ -157,7 +170,6 @@ public class ControladorQuiz {
 		if(puntuaciones == null) {
 			puntuaciones = new ArrayList<>();
 		}
-		@SuppressWarnings("unchecked")
 		int puntos = 0;
 		for (Integer suma : puntuaciones) {
 			puntos += suma; 
@@ -332,6 +344,9 @@ public class ControladorQuiz {
 		request.getSession().setAttribute("USUARIOS",messages);
 		request.getSession().setAttribute("PUNTUACION",puntuaciones);
 		request.getSession().setAttribute("RESULTADO", puntos);
+		
+		Jugador jugador = new Jugador(messages,puntos);
+		jugadorDao.save(jugador);
 		return "redirect:/paginaResultado";
 	}
 	
@@ -351,7 +366,7 @@ public class ControladorQuiz {
 		} 
 		request.getSession().setAttribute("USUARIOS",messages);
 		request.getSession().setAttribute("PUNTUACION",puntuaciones);
-		return "redirect:/quiz";
+		return "redirect:/";
 	}
 	
 	@PostMapping("/destroy")
@@ -359,4 +374,5 @@ public class ControladorQuiz {
 	request.getSession().invalidate();
 	return "redirect:/quiz";
 	}
+	
 }

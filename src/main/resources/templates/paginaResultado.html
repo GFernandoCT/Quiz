@@ -72,5 +72,24 @@
         <h2>Resultado</h2>
         <p th:text="${sessionResultado}"></p>
     </div>
+    <div>
+    <table class="table">
+				<thead>
+					<tr>
+						<th scope="col">id</th>
+						<th scope="col">name</th>
+						<th scope="col">puntuacion</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="jugador: ${jugadores}">
+						<td th:text="${jugador.id}" />
+						<td th:text="${jugador.name}" />
+						<td th:text="${jugador.puntuacion}" />
+						<td th:text="${sessionResultado}"/>
+					</tr>
+					<p th:text="${sessionResultado}"></p>
+			</table>
+			</div>
 </body>
 </html>
