@@ -14,7 +14,7 @@
             <h1 class="display-4">¿Qué animal tendrías como mascota?</h1>
         </div>
         <div class="container">
-        <hr class="my-4">
+            <hr class="my-4">
             <div class="d-flex justify-content-center">
                 <img th:src="@{images/musica.jpg}" class="img-fluid" alt="Musica"><br>
             </div>
@@ -23,11 +23,16 @@
                 <form th:action="@{/paginaPregunta5}" method="post">
                     <div class="d-flex justify-content-center">
                         <div class="btn-group">
-                            <button type="submit" class="btn btn-primary btn-lg mt-5" name="puntuacion" value="3">KPop</button>
-                            <button type="submit" class="btn btn-primary btn-lg mt-5" name="puntuacion" value="1">Hip Hop</button>
-                            <button type="submit" class="btn btn-primary btn-lg mt-5" name="puntuacion" value="2">Jazz</button>
-                            <button type="submit" class="btn btn-primary btn-lg mt-5" name="puntuacion" value="2">Rock</button>
-                            <button type="submit" class="btn btn-primary btn-lg mt-5" name="puntuacion" value="6">Alternativo</button>
+                            <button type="submit" class="btn btn-primary btn-lg mt-5" name="puntuacion"
+                                value="3">KPop</button>
+                            <button type="submit" class="btn btn-primary btn-lg mt-5" name="puntuacion" value="1">Hip
+                                Hop</button>
+                            <button type="submit" class="btn btn-primary btn-lg mt-5" name="puntuacion"
+                                value="2">Jazz</button>
+                            <button type="submit" class="btn btn-primary btn-lg mt-5" name="puntuacion"
+                                value="2">Rock</button>
+                            <button type="submit" class="btn btn-primary btn-lg mt-5" name="puntuacion"
+                                value="6">Alternativo</button>
                         </div>
                     </div>
                     <!-- <br><button type="submit" class="btn btn-primary btn-lg btn-block" value="0"
@@ -36,10 +41,10 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-			<form th:action="@{/destroy}" method="post">
-					<button type="submit" class="btn btn-secondary">Reiniciar Test</button>
-			</form>
-		</div>
+            <form th:action="@{/destroy}" method="post">
+                <button type="submit" class="btn btn-secondary">Reiniciar Test</button>
+            </form>
+        </div>
     </div>
 </body>
 

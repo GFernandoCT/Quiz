@@ -14,7 +14,7 @@
             <h1 class="display-4">¿Qué animal tendrías como mascota?</h1>
         </div>
         <div class="container">
-        <hr class="my-4">
+            <hr class="my-4">
             <div class="d-flex justify-content-center">
                 <img th:src="@{images/animales.jpg}" class="img-fluid" alt="Animales">
             </div>
@@ -35,16 +35,15 @@
                             </div>
                         </fieldset>
                     </div>
-                    <br><button type="submit" class="btn btn-primary btn-lg btn-block"
-                        name="puntuacion">Siguiente Pregunta</button>
+                    <br><button type="submit" class="btn btn-primary btn-lg btn-block">Siguiente Pregunta</button>
                 </form>
             </div>
         </div>
         <div class="d-flex justify-content-end">
-			<form th:action="@{/destroy}" method="post">
-					<button type="submit" class="btn btn-secondary">Reiniciar Test</button>
-			</form>
-		</div>
+            <form th:action="@{/destroy}" method="post">
+                <button type="submit" class="btn btn-secondary">Reiniciar Test</button>
+            </form>
+        </div>
     </div>
 </body>
 

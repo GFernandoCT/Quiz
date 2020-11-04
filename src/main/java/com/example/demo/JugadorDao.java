@@ -13,5 +13,6 @@ public interface JugadorDao {
 	List<Jugador> findByNameAndPrice(String name, int puntuacion);
 	Optional<Jugador> findById(Long id);
 	String getNameById(Long id);
+	List<Jugador> findLast();
 
 }

@@ -22,14 +22,12 @@ public class ControladorQuiz {
 	@Autowired
 	private JugadorDao jugadorDao;
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	/*@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index(Model model,HttpSession session) {
 	List<Jugador> jugadores=jugadorDao.findAll();
-	Jugador jugador = new Jugador( 1l,"pepe",64);
-	jugadores.add(jugador);
 	model.addAttribute("jugadores",jugadores);
-	return "paginaResultado";
-	}
+	return "redirect:/paginaResultado";
+	}*/
 	
 	@GetMapping("/quiz")
 	public String process(Model model, HttpSession session) {
@@ -51,16 +49,10 @@ public class ControladorQuiz {
 	@GetMapping("/Pagina2")
 	public String pagina2(Model model, HttpSession session) {
 		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
-		if(messages == null) {
-			messages = new ArrayList<>();
-		}
-		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
 		if(puntuaciones == null) {
 			puntuaciones = new ArrayList<>();
 		}
-		model.addAttribute("sessionMessages", messages);
 		model.addAttribute("sessionPuntuacion",puntuaciones);
 		return "Pagina2";
 	}
@@ -69,16 +61,10 @@ public class ControladorQuiz {
 	@GetMapping("/Pagina3")
 	public String pagina3(Model model, HttpSession session) {
 		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
-		if(messages == null) {
-			messages = new ArrayList<>();
-		}
-		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
 		if(puntuaciones == null) {
 			puntuaciones = new ArrayList<>();
 		}
-		model.addAttribute("sessionMessages", messages);
 		model.addAttribute("sessionPuntuacion",puntuaciones);
 		return "Pagina3";
 	}
@@ -86,16 +72,10 @@ public class ControladorQuiz {
 	@GetMapping("/Pagina4")
 	public String pagina4(Model model, HttpSession session) {
 		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
-		if(messages == null) {
-			messages = new ArrayList<>();
-		}
-		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
 		if(puntuaciones == null) {
 			puntuaciones = new ArrayList<>();
 		}
-		model.addAttribute("sessionMessages", messages);
 		model.addAttribute("sessionPuntuacion",puntuaciones);
 		return "Pagina4";
 	}
@@ -103,16 +83,10 @@ public class ControladorQuiz {
 	@GetMapping("/Pagina5")
 	public String pagina5(Model model, HttpSession session) {
 		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
-		if(messages == null) {
-			messages = new ArrayList<>();
-		}
-		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
 		if(puntuaciones == null) {
 			puntuaciones = new ArrayList<>();
 		}
-		model.addAttribute("sessionMessages", messages);
 		model.addAttribute("sessionPuntuacion",puntuaciones);
 		return "Pagina5";
 	}
@@ -120,27 +94,16 @@ public class ControladorQuiz {
 	@GetMapping("/Pagina6")
 	public String pagina6(Model model, HttpSession session) {
 		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
-		if(messages == null) {
-			messages = new ArrayList<>();
-		}
-		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
 		if(puntuaciones == null) {
 			puntuaciones = new ArrayList<>();
 		}
-		model.addAttribute("sessionMessages", messages);
 		model.addAttribute("sessionPuntuacion",puntuaciones);
 		return "Pagina6";
 	}
 	
 	@GetMapping("/Pagina7")
 	public String pagina7(Model model, HttpSession session) {
-		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) session.getAttribute("USUARIOS");
-		if(messages == null) {
-			messages = new ArrayList<>();
-		}
 		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) session.getAttribute("PUNTUACION");
 		if(puntuaciones == null) {
@@ -152,7 +115,6 @@ public class ControladorQuiz {
 			resultado = (int) session.getAttribute("RESULTADO");
 		} 
 		
-		model.addAttribute("sessionMessages", messages);
 		model.addAttribute("sessionPuntuacion",puntuaciones);
 		model.addAttribute("sessionResultado",resultado);
 		return "Pagina7";
@@ -174,6 +136,13 @@ public class ControladorQuiz {
 		for (Integer suma : puntuaciones) {
 			puntos += suma; 
 		}
+		
+		/*
+		List<Jugador> jugadores=jugadorDao.findAll();
+		List<Jugador> jugadores2=jugadorDao.findLast();
+		model.addAttribute("jugadores",jugadores);
+		model.addAttribute("jugadoresFinal",jugadores2);*/
+		
 		model.addAttribute("sessionMessages", messages);
 		model.addAttribute("sessionPuntuacion",puntuaciones);
 		model.addAttribute("sessionResultado",puntos);
@@ -204,12 +173,7 @@ public class ControladorQuiz {
 	@PostMapping("/paginaPregunta2")
 	public String paginaSiguiente(@RequestParam("puntuacion") String puntuacion, HttpServletRequest request) {
 		StringTokenizer tokenizer = new StringTokenizer(puntuacion,",");
-		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) request.getSession().getAttribute("USUARIOS");
-		if (messages == null) {
-			messages = new ArrayList<>();
-			request.getSession().setAttribute("USUARIOS", messages);
-		}
+		
 		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) request.getSession().getAttribute("PUNTUACION");
 		if (puntuaciones == null) {
@@ -219,76 +183,52 @@ public class ControladorQuiz {
 		while (tokenizer.hasMoreElements()) {
 			puntuaciones.add(Integer.parseInt(tokenizer.nextToken()));
 		}		
-		request.getSession().setAttribute("USUARIOS",messages);
 		request.getSession().setAttribute("PUNTUACION",puntuaciones);
 		return "redirect:/Pagina3";
 	}
 	
 	@PostMapping("/paginaPregunta3")
-	public String pagina3(@RequestParam("radio") String puntuacion, HttpServletRequest request) {
-		StringTokenizer tokenizer = new StringTokenizer(puntuacion,",");
-		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) request.getSession().getAttribute("USUARIOS");
-		if (messages == null) {
-			messages = new ArrayList<>();
-			request.getSession().setAttribute("USUARIOS", messages);
-		}
+	public String pagina3(@RequestParam("puntuacion") String puntuacion, HttpServletRequest request) {
+		
 		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) request.getSession().getAttribute("PUNTUACION");
 		if (puntuaciones == null) {
 			puntuaciones = new ArrayList<>();
 			request.getSession().setAttribute("PUNTUACION", puntuaciones);
-		}
-		while (tokenizer.hasMoreElements()) {
-			puntuaciones.add(Integer.parseInt(tokenizer.nextToken()));
+		} else {
+			puntuaciones.add(Integer.parseInt(puntuacion));
 		}		
-		request.getSession().setAttribute("USUARIOS",messages);
 		request.getSession().setAttribute("PUNTUACION",puntuaciones);
 		return "redirect:/Pagina4";
 	}
 	
 	@PostMapping("/paginaPregunta4")
 	public String pagina4(@RequestParam("puntuacion") String puntuacion, HttpServletRequest request) {
-		StringTokenizer tokenizer = new StringTokenizer(puntuacion,",");
-		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) request.getSession().getAttribute("USUARIOS");
-		if (messages == null) {
-			messages = new ArrayList<>();
-			request.getSession().setAttribute("USUARIOS", messages);
-		}
+		
 		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) request.getSession().getAttribute("PUNTUACION");
 		if (puntuaciones == null) {
 			puntuaciones = new ArrayList<>();
 			request.getSession().setAttribute("PUNTUACION", puntuaciones);
 		}
-		while (tokenizer.hasMoreElements()) {
-			puntuaciones.add(Integer.parseInt(tokenizer.nextToken()));
+		else {
+			puntuaciones.add(Integer.parseInt(puntuacion));
 		}		
-		request.getSession().setAttribute("USUARIOS",messages);
 		request.getSession().setAttribute("PUNTUACION",puntuaciones);
 		return "redirect:/Pagina5";
 	}
 	
 	@PostMapping("/paginaPregunta5")
 	public String pagina5(@RequestParam("puntuacion") String puntuacion, HttpServletRequest request) {
-		StringTokenizer tokenizer = new StringTokenizer(puntuacion,",");
-		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) request.getSession().getAttribute("USUARIOS");
-		if (messages == null) {
-			messages = new ArrayList<>();
-			request.getSession().setAttribute("USUARIOS", messages);
-		}
 		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) request.getSession().getAttribute("PUNTUACION");
 		if (puntuaciones == null) {
 			puntuaciones = new ArrayList<>();
 			request.getSession().setAttribute("PUNTUACION", puntuaciones);
 		}
-		while (tokenizer.hasMoreElements()) {
-			puntuaciones.add(Integer.parseInt(tokenizer.nextToken()));
-		}		
-		request.getSession().setAttribute("USUARIOS",messages);
+		else {
+			puntuaciones.add(Integer.parseInt(puntuacion));
+		}
 		request.getSession().setAttribute("PUNTUACION",puntuaciones);
 		return "redirect:/Pagina6";
 	}
@@ -297,12 +237,6 @@ public class ControladorQuiz {
 	public String pagina6(@RequestParam("puntuacion") String puntuacion, HttpServletRequest request) {
 		StringTokenizer tokenizer = new StringTokenizer(puntuacion,",");
 		@SuppressWarnings("unchecked")
-		List<String> messages = (List<String>) request.getSession().getAttribute("USUARIOS");
-		if (messages == null) {
-			messages = new ArrayList<>();
-			request.getSession().setAttribute("USUARIOS", messages);
-		}
-		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) request.getSession().getAttribute("PUNTUACION");
 		if (puntuaciones == null) {
 			puntuaciones = new ArrayList<>();
@@ -311,7 +245,6 @@ public class ControladorQuiz {
 		while (tokenizer.hasMoreElements()) {
 			puntuaciones.add(Integer.parseInt(tokenizer.nextToken()));
 		}		
-		request.getSession().setAttribute("USUARIOS",messages);
 		request.getSession().setAttribute("PUNTUACION",puntuaciones);
 		return "redirect:/Pagina7";
 	}
@@ -325,17 +258,17 @@ public class ControladorQuiz {
 			messages = new ArrayList<>();
 			request.getSession().setAttribute("USUARIOS", messages);
 		}
+		
 		@SuppressWarnings("unchecked")
 		List<Integer> puntuaciones = (List<Integer>) request.getSession().getAttribute("PUNTUACION");
 		if (puntuaciones == null) {
 			puntuaciones = new ArrayList<>();
 			request.getSession().setAttribute("PUNTUACION", puntuaciones);
 		}
-		while (tokenizer.hasMoreElements()) {
-			puntuaciones.add(Integer.parseInt(tokenizer.nextToken()));
+		else {
+			puntuaciones.add(Integer.parseInt(puntuacion));
 		}
 		
-		@SuppressWarnings("unchecked")
 		int puntos = 0;
 		for (Integer suma : puntuaciones) {
 			puntos += suma; 
@@ -350,6 +283,7 @@ public class ControladorQuiz {
 		return "redirect:/paginaResultado";
 	}
 	
+	/*
 	@PostMapping("/volverInicio")
 	public String volverInicio(HttpServletRequest request) {
 		@SuppressWarnings("unchecked")
@@ -367,7 +301,7 @@ public class ControladorQuiz {
 		request.getSession().setAttribute("USUARIOS",messages);
 		request.getSession().setAttribute("PUNTUACION",puntuaciones);
 		return "redirect:/";
-	}
+	}*/
 	
 	@PostMapping("/destroy")
 	public String destroySession(HttpServletRequest request) {

@@ -41,20 +41,27 @@ public class JugadorJbdc implements JugadorDao{
 
 	@Override
 	public List<Jugador> findByNameAndPrice(String name, int puntuacion) {
-		return jdbcTemplate.query("select * from books where name like ? and puntuacion <= ?",
+		return jdbcTemplate.query("select * from jugadores where name like ? and puntuacion <= ?",
 				new Object[] { "%" + name + "%", puntuacion },
 				(rs, rowNum) -> new Jugador(rs.getLong("id"), rs.getString("name"), rs.getInt("puntuacion")));
 	}
 
 	@Override
 	public Optional<Jugador> findById(Long id) {
-		return jdbcTemplate.queryForObject("select * from books where id = ?", new Object[] { id }, (rs,
+		return jdbcTemplate.queryForObject("select * from jugadores where id = ?", new Object[] { id }, (rs,
 				rowNum) -> Optional.of(new Jugador(rs.getLong("id"), rs.getString("name"), rs.getInt("puntuacion"))));
 	}
 
+
+	@Override
+	public List<Jugador> findLast() {
+		return jdbcTemplate.query("select * from jugadores order by id DESC LIMIT 5",
+				(rs, rowNum) -> new Jugador(rs.getLong("id"), rs.getString("name"), rs.getInt("puntuacion")));
+	}
+	
 	@Override
 	public String getNameById(Long id) {
-		return jdbcTemplate.queryForObject("select name from books where id = ?", new Object[] { id }, String.class);
+		return jdbcTemplate.queryForObject("select name from jugadores where id = ?", new Object[] { id }, String.class);
 	}
 
 }
